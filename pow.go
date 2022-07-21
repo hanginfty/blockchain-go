@@ -8,10 +8,11 @@ import (
 	"math/big"
 )
 
-// 定义静态挖矿难度：前 N 位必须是 0
-const targetBits uint = 24
-
-const maxNonce = math.MaxInt64
+const (
+	// 定义静态挖矿难度：前 N 位必须是 0
+	targetBits uint = 16
+	maxNonce        = math.MaxInt64
+)
 
 type ProofOfWork struct {
 	// block pointer to the Block to be proven.
@@ -22,7 +23,7 @@ type ProofOfWork struct {
 }
 
 func NewProofOfWork(b *Block) *ProofOfWork {
-	target := big.NewInt(0)
+	target := big.NewInt(1)
 	target.Lsh(target, uint(255-targetBits))
 	return &ProofOfWork{
 		block:  b,

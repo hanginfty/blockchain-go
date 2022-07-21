@@ -21,7 +21,6 @@ type Block struct {
 }
 
 func NewBlock(data string, prevHash []byte) *Block {
-
 	block := &Block{
 		Timestamp: time.Now().Unix(),
 		PrevHash:  prevHash,
@@ -34,7 +33,7 @@ func NewBlock(data string, prevHash []byte) *Block {
 	nonce, hash := pow.Run()
 
 	block.Nonce = nonce
-	block.Hash = hash
+	block.Hash = hash[:]
 
 	return block
 }
@@ -51,7 +50,6 @@ func (b *Block) Serialize() []byte {
 	if err != nil {
 		fmt.Printf("block %v serialize failed\n", b.Hash)
 	}
-
 	return res.Bytes()
 }
 
